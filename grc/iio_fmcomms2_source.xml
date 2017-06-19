@@ -5,13 +5,27 @@
 	<category>Industrial IO</category>
 	<flags>throttle</flags>
 	<import>from gnuradio import iio</import>
-	<make>iio.fmcomms2_source($uri, $frequency, $samplerate, $decimation - 1, $bandwidth, $ch1_en, $ch2_en, $ch3_en, $ch4_en, $buffer_size, $quadrature, $rfdc, $bbdc, $gain1, $manual_gain1, $gain2, $manual_gain2, $rf_port_select, $filter)</make>
+	<make>iio.fmcomms2_source($uri, $frequency, $samplerate, $decimation - 1, $bandwidth, $ch1_en, $ch2_en, $ch3_en, $ch4_en, $buffer_size, $quadrature, $rfdc, $bbdc, $gain1, $manual_gain1, $gain2, $manual_gain2, $rf_port_select, $filter, $phyname, $rxname)</make>
 	<callback>set_params($frequency, $samplerate, $bandwidth, $quadrature, $rfdc, $bbdc, $gain1, $manual_gain1, $gain2, $manual_gain2, $rf_port_select)</callback>
 
 	<param>
 		<name>IIO context URI</name>
 		<key>uri</key>
 		<value>local:</value>
+		<type>string</type>
+	</param>
+
+	<param>
+		<name>PHY device name</name>
+		<key>phyname</key>
+		<value>ad9361-phy</value>
+		<type>string</type>
+	</param>
+
+	<param>
+		<name>RX device name</name>
+		<key>rxname</key>
+		<value>cf-ad9361-lpc</value>
 		<type>string</type>
 	</param>
 

@@ -56,7 +56,9 @@ namespace gr {
 		    unsigned long buffer_size, bool quadrature, bool rfdc,
 		    bool bbdc, const char *gain1, double gain1_value,
 		    const char *gain2, double gain2_value,
-		    const char *rf_port_select, const char *filter = "");
+		    const char *rf_port_select, const char *filter = "",
+		    const char *phyname = "ad9361-phy",
+		    const char *rxname = "cf-ad9361-lpc");
 
       static sptr make_from(struct iio_context *ctx,
 		    unsigned long long frequency, unsigned long samplerate,
@@ -65,7 +67,9 @@ namespace gr {
 		    unsigned long buffer_size, bool quadrature, bool rfdc,
 		    bool bbdc, const char *gain1, double gain1_value,
 		    const char *gain2, double gain2_value,
-		    const char *rf_port_select, const char *filter = "");
+		    const char *rf_port_select, const char *filter = "",
+		    const char *phyname = "ad9361-phy",
+		    const char *rxname = "cf-ad9361-lpc");
 
       virtual void set_params(unsigned long long frequency,
 		      unsigned long samplerate, unsigned long bandwidth,
