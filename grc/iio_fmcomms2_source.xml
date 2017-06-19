@@ -5,13 +5,27 @@
 	<category>[Industrial IO]/FMComms</category>
 	<flags>throttle</flags>
 	<import>import iio</import>
-	<make>iio.fmcomms2_source_f32c($uri, int($frequency), int($samplerate), int($bandwidth), $rx1_en, $rx2_en, $buffer_size, $quadrature, $rfdc, $bbdc, $gain1, $manual_gain1, $gain2, $manual_gain2, $rf_port_select, $filter, $auto_filter)</make>
+	<make>iio.fmcomms2_source_f32c($uri, int($frequency), int($samplerate), int($bandwidth), $rx1_en, $rx2_en, $buffer_size, $quadrature, $rfdc, $bbdc, $gain1, $manual_gain1, $gain2, $manual_gain2, $rf_port_select, $filter, $auto_filter, $phyname, $rxname)</make>
 	<callback>set_params(int($frequency), int($samplerate), int($bandwidth), $quadrature, $rfdc, $bbdc, $gain1, $manual_gain1, $gain2, $manual_gain2, $rf_port_select, $filter, $auto_filter)</callback>
 
 	<param>
 		<name>IIO context URI</name>
 		<key>uri</key>
 		<value>local:</value>
+		<type>string</type>
+	</param>
+
+	<param>
+		<name>PHY device name</name>
+		<key>phyname</key>
+		<value>ad9361-phy</value>
+		<type>string</type>
+	</param>
+
+	<param>
+		<name>RX device name</name>
+		<key>rxname</key>
+		<value>cf-ad9361-lpc</value>
 		<type>string</type>
 	</param>
 
