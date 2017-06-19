@@ -39,13 +39,14 @@ namespace gr {
 		    bool ch1_en, bool ch2_en, bool ch3_en, bool ch4_en,
 		    unsigned long buffer_size, bool cyclic,
 		    const char *rf_port_select, double attenuation1,
-		    double attenuation2, const char *filter)
+		    double attenuation2, const char *filter,
+		    const char *phyname, const char *txname)
     {
       return gnuradio::get_initial_sptr(
 	    new fmcomms2_sink_impl(device_source_impl::get_context(uri), true,
 		    frequency, samplerate, interpolation, bandwidth, ch1_en,
 		    ch2_en, ch3_en, ch4_en, buffer_size, cyclic, rf_port_select,
-		    attenuation1, attenuation2, filter));
+		    attenuation1, attenuation2, filter, phyname, txname));
     }
 
     fmcomms2_sink::sptr
@@ -55,13 +56,14 @@ namespace gr {
 		    bool ch1_en, bool ch2_en, bool ch3_en, bool ch4_en,
 		    unsigned long buffer_size, bool cyclic,
 		    const char *rf_port_select, double attenuation1,
-		    double attenuation2, const char *filter)
+		    double attenuation2, const char *filter,
+		    const char *phyname, const char *txname)
     {
       return gnuradio::get_initial_sptr(
 	    new fmcomms2_sink_impl(ctx, false, frequency, samplerate,
 		    interpolation, bandwidth, ch1_en, ch2_en, ch3_en, ch4_en,
 		    buffer_size, cyclic, rf_port_select,
-		    attenuation1, attenuation2, filter));
+		    attenuation1, attenuation2, filter, phyname, txname));
     }
 
     std::vector<std::string> fmcomms2_sink_impl::get_channels_vector(
@@ -86,13 +88,14 @@ namespace gr {
 		    bool ch1_en, bool ch2_en, bool ch3_en, bool ch4_en,
 		    unsigned long buffer_size, bool cyclic,
 		    const char *rf_port_select, double attenuation1,
-		    double attenuation2, const char *filter)
+		    double attenuation2, const char *filter,
+		    const char *phyname, const char *txname)
 	    : gr::sync_block("fmcomms2_sink",
 			    gr::io_signature::make(1, -1, sizeof(short)),
 			    gr::io_signature::make(0, 0, 0)),
-	      device_sink_impl(ctx, destroy_ctx, "cf-ad9361-dds-core-lpc",
+	      device_sink_impl(ctx, destroy_ctx, txname,
 			    get_channels_vector(ch1_en, ch2_en, ch3_en, ch4_en),
-			    "ad9361-phy", std::vector<std::string>(),
+			    phyname, std::vector<std::string>(),
 			    buffer_size, interpolation, cyclic),
 	      cyclic(cyclic)
     {

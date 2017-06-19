@@ -42,7 +42,9 @@ namespace gr {
 		    bool ch1_en, bool ch2_en, bool ch3_en, bool ch4_en,
 		    unsigned long buffer_size, bool cyclic,
 		    const char *rf_port_select, double attenuation1,
-		    double attenuation2, const char *filter = "");
+		    double attenuation2, const char *filter = "",
+		    const char *phyname = "ad9361-phy",
+		    const char *txname = "cf-ad9361-dds-core-lpc");
 
       static sptr make_from(struct iio_context *ctx,
 		    unsigned long long frequency, unsigned long samplerate,
@@ -50,7 +52,9 @@ namespace gr {
 		    bool ch1_en, bool ch2_en, bool ch3_en, bool ch4_en,
 		    unsigned long buffer_size, bool cyclic,
 		    const char *rf_port_select, double attenuation1,
-		    double attenuation2, const char *filter = "");
+		    double attenuation2, const char *filter = "",
+		    const char *phyname = "ad9361-phy",
+		    const char *txname = "cf-ad9361-dds-core-lpc");
 
       virtual void set_params(unsigned long long frequency,
 		      unsigned long samplerate, unsigned long bandwidth,
