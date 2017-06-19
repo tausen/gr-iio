@@ -5,13 +5,27 @@
 	<category>[Industrial IO]/FMComms</category>
 	<flags>throttle</flags>
 	<import>from gnuradio import iio</import>
-	<make>iio.fmcomms2_sink_f32c($uri, int($frequency), int($samplerate), int($bandwidth), $tx1_en, $tx2_en, $buffer_size, $cyclic, $rf_port_select, $attenuation1, $attenuation2, $filter, $auto_filter)</make>
+	<make>iio.fmcomms2_sink_f32c($uri, int($frequency), int($samplerate), int($bandwidth), $tx1_en, $tx2_en, $buffer_size, $cyclic, $rf_port_select, $attenuation1, $attenuation2, $filter, $auto_filter, $phyname, $txname)</make>
 	<callback>set_params(int($frequency), int($samplerate), int($bandwidth), $rf_port_select, $attenuation1, $attenuation2, $filter, $auto_filter)</callback>
 
 	<param>
 		<name>IIO context URI</name>
 		<key>uri</key>
 		<value>local:</value>
+		<type>string</type>
+	</param>
+
+	<param>
+		<name>PHY device name</name>
+		<key>phyname</key>
+		<value>ad9361-phy</value>
+		<type>string</type>
+	</param>
+
+	<param>
+		<name>TX device name</name>
+		<key>txname</key>
+		<value>cf-ad9361-dds-core-lpc</value>
 		<type>string</type>
 	</param>
 

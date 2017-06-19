@@ -1,18 +1,18 @@
 /* -*- c++ -*- */
-/* 
+/*
  * Copyright 2014 Analog Devices Inc.
  * Author: Paul Cercueil <paul.cercueil@analog.com>
- * 
+ *
  * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3, or (at your option)
  * any later version.
- * 
+ *
  * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this software; see the file COPYING.  If not, write to
  * the Free Software Foundation, Inc., 51 Franklin Street,
@@ -72,13 +72,14 @@ namespace gr {
 		    bool ch1_en, bool ch2_en, bool ch3_en, bool ch4_en,
 		    unsigned long buffer_size, bool cyclic,
 		    const char *rf_port_select, double attenuation1,
-		    double attenuation2, const char *filter, bool auto_filter)
+		    double attenuation2, const char *filter, bool auto_filter,
+		    const char *phyname, const char *txname)
     {
       return gnuradio::get_initial_sptr(
 	    new fmcomms2_sink_impl(device_source_impl::get_context(uri), true,
 		    frequency, samplerate, bandwidth, ch1_en,
 		    ch2_en, ch3_en, ch4_en, buffer_size, cyclic, rf_port_select,
-		    attenuation1, attenuation2, filter, auto_filter));
+		    attenuation1, attenuation2, filter, auto_filter, phyname, txname));
     }
 
     fmcomms2_sink::sptr
@@ -88,13 +89,14 @@ namespace gr {
 		    bool ch1_en, bool ch2_en, bool ch3_en, bool ch4_en,
 		    unsigned long buffer_size, bool cyclic,
 		    const char *rf_port_select, double attenuation1,
-		    double attenuation2, const char *filter, bool auto_filter)
+		    double attenuation2, const char *filter, bool auto_filter,
+		    const char *phyname, const char *txname)
     {
       return gnuradio::get_initial_sptr(
 	    new fmcomms2_sink_impl(ctx, false, frequency, samplerate,
 		    bandwidth, ch1_en, ch2_en, ch3_en, ch4_en,
 		    buffer_size, cyclic, rf_port_select,
-		    attenuation1, attenuation2, filter, auto_filter));
+		    attenuation1, attenuation2, filter, auto_filter, phyname, txname));
     }
 
     std::vector<std::string> fmcomms2_sink_impl::get_channels_vector(
@@ -119,13 +121,14 @@ namespace gr {
 		    bool ch1_en, bool ch2_en, bool ch3_en, bool ch4_en,
 		    unsigned long buffer_size, bool cyclic,
 		    const char *rf_port_select, double attenuation1,
-		    double attenuation2, const char *filter, bool auto_filter)
+		    double attenuation2, const char *filter, bool auto_filter,
+		    const char *phyname, const char *txname)
 	    : gr::sync_block("fmcomms2_sink",
 			    gr::io_signature::make(1, -1, sizeof(short)),
 			    gr::io_signature::make(0, 0, 0)),
-	      device_sink_impl(ctx, destroy_ctx, "cf-ad9361-dds-core-lpc",
+	      device_sink_impl(ctx, destroy_ctx, txname,
 			    get_channels_vector(ch1_en, ch2_en, ch3_en, ch4_en),
-			    "ad9361-phy", std::vector<std::string>(),
+			    phyname, std::vector<std::string>(),
 			    buffer_size, 0, cyclic),
 	      cyclic(cyclic)
     {

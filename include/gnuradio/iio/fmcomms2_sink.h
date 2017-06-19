@@ -1,18 +1,18 @@
 /* -*- c++ -*- */
-/* 
+/*
  * Copyright 2014 Analog Devices Inc.
  * Author: Paul Cercueil <paul.cercueil@analog.com>
- * 
+ *
  * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3, or (at your option)
  * any later version.
- * 
+ *
  * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this software; see the file COPYING.  If not, write to
  * the Free Software Foundation, Inc., 51 Franklin Street,
@@ -44,7 +44,9 @@ namespace gr {
 		    unsigned long buffer_size, bool cyclic,
 		    const char *rf_port_select, double attenuation1,
 		    double attenuation2, const char *filter = "",
-		    bool auto_filter = true);
+		    bool auto_filter = true,
+		    const char *phyname = "ad9361-phy",
+		    const char *txname = "cf-ad9361-dds-core-lpc");
 
       static sptr make_from(struct iio_context *ctx,
 		    unsigned long long frequency, unsigned long samplerate,
@@ -53,7 +55,9 @@ namespace gr {
 		    unsigned long buffer_size, bool cyclic,
 		    const char *rf_port_select, double attenuation1,
 		    double attenuation2, const char *filter = "",
-		    bool auto_filter = true);
+		    bool auto_filter = true,
+		    const char *phyname = "ad9361-phy",
+		    const char *txname = "cf-ad9361-dds-core-lpc");
 
       virtual void set_params(unsigned long long frequency,
 		      unsigned long samplerate, unsigned long bandwidth,
@@ -73,13 +77,16 @@ namespace gr {
 		    unsigned long buffer_size, bool cyclic,
 		    const char *rf_port_select, double attenuation1,
 		    double attenuation2, const char *filter = "",
-		    bool auto_filter = true)
+		    bool auto_filter = true,
+		    const char *phyname = "ad9361-phy",
+		    const char *txname = "cf-ad9361-dds-core-lpc")
       {
 	      fmcomms2_sink::sptr block = fmcomms2_sink::make(uri, frequency,
 			      samplerate, bandwidth, rx1_en,
 			      rx1_en, rx2_en, rx2_en, buffer_size, cyclic,
 			      rf_port_select, attenuation1, attenuation2,
-			      filter, auto_filter);
+			      filter, auto_filter,
+			      phyname, txname);
 
 	      return gnuradio::get_initial_sptr(
 			      new fmcomms2_sink_f32c(rx1_en, rx2_en, block));
@@ -108,4 +115,3 @@ namespace gr {
 } // namespace gr
 
 #endif /* INCLUDED_IIO_FMCOMMS2_SINK_H */
-
